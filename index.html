@@ -1,12 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./assets/css/style.css" rel="stylesheet">
     <title>Javascript Basics Quiz!</title>
 </head>
+
 <body>
-    
+    <header>
+        <span class="highscore">view high scores</span>
+    </header>
+    <section class="container">
+        <div class="start-screen hide">
+            <div id="main-screen">
+                <h1>Javascript Basics Quiz</h1>
+                <p>Do your best to answer these basic javascript questions. <br />
+                Careful!! There is a time limit and choosing the wrong answer will result in a time penalty! <br />
+            See if you can get the top score. Good luck!</p>
+            <div class="start-quiz">
+                <button id="start-btn" class="start">Start</button>
+            </div>
+            </div>
+        </div>
+        <div id="question-card">
+            <div id="question">Question</div>
+            <div id="answers" class="answer-buttons">
+                <button class="btn">answer 1</button>
+                <button class="btn">answer 2</button>
+                <button class="btn">answer 3</button>
+                <button class="btn">answer 4</button>
+                <div id="check" class="check-style">correct or incorrect</div>
+            </div>
+        </div>
+    </section>
+    <script src="./assets/js/script.js"></script>
+
 </body>
+
 </html>
