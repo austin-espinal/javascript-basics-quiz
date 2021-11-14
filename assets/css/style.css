@@ -38,3 +38,12 @@ section {
     flex-direction: column;
     align-items: center;
 }
+.verify-border {
+    border-top: 5px solid black;
+}
+.correct {
+    color: olivedrab;
+}
+.incorrect {
+    color: crimson;
+}

@@ -8,6 +8,7 @@ var answer1Btn = document.getElementById('answer-1');
 var answer2Btn = document.getElementById('answer-2');
 var answer3Btn = document.getElementById('answer-3');
 var answer4Btn = document.getElementById('answer-4');
+var verfication = document.getElementById('check');
 
 var shuffleQuestions, currentQuestionIndex
 
@@ -28,7 +29,7 @@ var score = 0;
 //array of questions
 var questions = [
     {
-        question: 'what is my first name',
+        question: 'what is my first name?',
         answers: [
             {text: 'austin', correct: true},
             {text: 'adam', correct: false},
@@ -37,12 +38,48 @@ var questions = [
         ]
     },
     {
-        question: 'what is my last name',
+        question: 'what is my last name?',
         answers: [
             {text: 'spinal', correct: false},
             {text: 'esp', correct: false},
             {text: 'espinal', correct: true},
             {text: 'esper', correct: false}
+        ]
+    },
+    {
+        question: 'who is my friend?',
+        answers: [
+            {text: 'mary', correct: false},
+            {text: 'bob', correct: true},
+            {text: 'joe', correct: false},
+            {text: 'esteban', correct: false}
+        ]
+    },
+    {
+        question: 'What is my favorite food?',
+        answers: [
+            {text: 'tacos', correct: false},
+            {text: 'burgers', correct: false},
+            {text: 'hot dogs', correct: false},
+            {text: 'pizza', correct: true}
+        ]
+    },
+    {
+        question: 'what is my favorite music?',
+        answers: [
+            {text: 'rap', correct: false},
+            {text: 'pop', correct: false},
+            {text: 'rock', correct: true},
+            {text: 'country', correct: false}
+        ]
+    },
+    {
+        question: 'what is my favorite animal?',
+        answers: [
+            {text: 'monkey', correct: true},
+            {text: 'dog', correct: false},
+            {text: 'cat', correct: false},
+            {text: 'spider', correct: false}
         ]
     }
 ]
@@ -55,6 +92,7 @@ function startQuiz() {
 
     shuffleQuestions = questions.sort(()=> Math.random() - 0.5);
     currentQuestionIndex = 0;
+    score = 0;
 
     quiz.classList.remove('hide');
 
@@ -62,7 +100,7 @@ function startQuiz() {
 }
 
 function nextQuestion() {
-    showQuestion(shuffleQuestions[currentQuestionIndex])
+    showQuestion(shuffleQuestions[currentQuestionIndex]);
 }
 
 function showQuestion(question) {
@@ -78,13 +116,28 @@ function showQuestion(question) {
 }
 
 function selectAnswer(event) {
-    // var btnPress = event.target.innerText;
-    // console.log(event.target.innerText)
-    // var correct = btnPress.dataset.correct;
+    answerVerify(event.target.innerText, currentQuestionIndex);
+    currentQuestionIndex++
+    nextQuestion(currentQuestionIndex);
+}
 
-    // if (answers[i] === true) {
-    //     console.log("correct");
-    //     currentQuestionIndex++
-    //     nextQuestion();
-    // }
+function answerVerify(btnText, currentQuestionIndex) {
+    for (const currentAnswer of questions[currentQuestionIndex].answers) {
+        if (btnText === currentAnswer.text) {
+            if (currentAnswer.correct === true) {
+                console.log("correct")
+                verfication.textContent = "Correct";
+                verfication.classList.add('correct');
+                verfication.classList.remove('hide', 'incorrect');
+
+                score = score + 5;
+                console.log(score);
+            } else {
+                console.log("wrong")
+                verfication.textContent = "Incorrect";
+                verfication.classList.add('incorrect');
+                verfication.classList.remove('hide', 'correct');
+            }
+        }
+    }
 }
