@@ -11,7 +11,8 @@
 
 <body>
     <header>
-        <span class="highscore">view high scores</span>
+        <div id ="highscore">view high scores</div>
+        <div id="timer">Time:</div>
     </header>
     <section class="container">
         <div id="main-screen" class="start-screen">
@@ -19,19 +20,23 @@
                 <h1>Javascript Basics Quiz</h1>
                 <p>Do your best to answer these basic javascript questions. <br />
                 Careful!! There is a time limit and choosing the wrong answer will result in a time penalty! <br />
-            See if you can get the top score. Good luck!</p>
+            See if you can get the max of 30 points. Good luck!</p>
             <div class="start-quiz">
                 <button id="start-btn" class="start">Start</button>
             </div>
             </div>
         </div>
-        <div id="question-card" class="hide">
+        <div id="question-card" class="quiz hide">
             <div id="question">Question</div>
             <div id="answers" class="answer-buttons">
                 <button id="answer-1" class="btn">answer 1</button>
                 <button id="answer-2" class="btn">answer 2</button>
                 <button id="answer-3" class="btn">answer 3</button>
                 <button id="answer-4" class="btn">answer 4</button>
+            </div>
+            <div id="results" class="hide">
+                <h2>Game Over!!</h2>
+                <button id="submit" class="btn">Sumbit</button>
             </div>
             <div id="check" class="verify-border hide">correct or incorrect</div>
         </div>
