@@ -15,6 +15,7 @@
         <div id="timer">Time:</div>
     </header>
     <section class="container">
+        <!--start screen-->
         <div id="main-screen" class="start-screen">
             <div>
                 <h1>Javascript Basics Quiz</h1>
@@ -26,6 +27,7 @@
                 </div>
             </div>
         </div>
+        <!--quiz questions and answers-->
         <div id="question-card" class="quiz hide">
             <div id="content">
                 <div id="question">Question</div>
@@ -36,6 +38,7 @@
                     <button id="answer-4" class="btn">answer 4</button>
                 </div>
             </div>
+        <!--results screen-->
             <div id="results" class="hide">
                 <h2>Game Over!!</h2>
                 <div id="final-score-text">final score</div>
@@ -46,9 +49,10 @@
             </div>
             <div id="check" class="verify-border hide">correct or incorrect</div>
         </div>
+        <!--view highscore screen-->
         <div id="view-highscore" class="hide">
             <h1>High Scores</h1>
-            <ol></ol>
+            <ol id="score-list"></ol>
             <button id="back-btn" class="btn">Back</button>
         </div>
     </section>

@@ -16,6 +16,7 @@ var viewHighscore = document.getElementById('view-highscore');
 var scoreTab = document.getElementById('highscores');
 var backBtn = document.getElementById('back-btn');
 var content = document.getElementById('content');
+var scoreList = document.querySelector('#score-list');
 
 
 
@@ -179,31 +180,33 @@ function endQuiz() {
     highscoreSave.classList.remove('hide');
 
     finalScoreText.textContent = "Your final score is " + score;
-    // var highScore = localStorage.getItem("highscore");
-    // if (highScore === null) {
-    //     highScore = 0;
-    // }
 
     highscoreBtn.addEventListener('click', savedScore);
 
 }
 
+//saves players score and name
 function savedScore(event) {
     var playerName = event.target.text
-    console.log
-    localStorage.setItem(playerName, JSON.stringify(score));
+    console.log(playerName);
+    playerScore = playerName + " " + JSON.stringify(score);
+    console.log(playerScore);
+    totalScores.push(playerScore)
+    localStorage.setItem(playerScore);
     loadScores();
 }
 
+ //goes to view highscore screen and adds new score
 function loadScores() {
     highscoreSave.classList.add('hide');
     startMenu.classList.add('hide');
 
     viewHighscore.classList.remove('hide');
 
-
+    scoreList.appendChild(playerScore);
 }
 
+//goes to start menu
 function mainMenu() {
     viewHighscore.classList.add('hide');
     startMenu.classList.remove('hide');
