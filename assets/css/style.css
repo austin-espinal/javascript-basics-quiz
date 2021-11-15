@@ -36,9 +36,15 @@ section {
 .start {
     background-color: var(--button-color);
     border-radius: 10px;
-    padding: 5px 10px;
+    padding: 10px 20px;
     color: var(--primary-color);
     outline: none;
+    margin: 10px;
+    font-size: 25px;
+}
+.btn,
+.start:hover {
+    background-color: cadetblue;
 }
 .start-screen {
     flex-direction: column;
@@ -58,4 +64,7 @@ section {
 }
 .incorrect {
     color: crimson;
+}
+#highscores {
+    color: blueviolet;
 }

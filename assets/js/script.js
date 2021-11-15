@@ -10,9 +10,18 @@ var answer3Btn = document.getElementById('answer-3');
 var answer4Btn = document.getElementById('answer-4');
 var verfication = document.getElementById('check');
 var highscoreSave = document.getElementById('results');
+var highscoreBtn = document.getElementById('submit-btn');
+var finalScoreText = document.getElementById('final-score-text');
+var viewHighscore = document.getElementById('view-highscore');
+var scoreTab = document.getElementById('highscores');
+var backBtn = document.getElementById('back-btn');
+var content = document.getElementById('content');
+
+
+
 var timerEl = document.getElementById('timer');
 
-var shuffleQuestions, currentQuestionIndex
+var shuffledQuestions, currentQuestionIndex
 
 var score = 0;
 
@@ -30,60 +39,63 @@ function timer() {
     }, 1000);
 }
 
+//array for saved high scores
+var totalScores = [];
+
 //array of questions
 var questions = [
     {
-        question: 'what is my first name?',
+        question: 'Commonly used data types DO NOT include',
         answers: [
-            { text: 'austin', correct: true },
-            { text: 'adam', correct: false },
-            { text: 'oz', correct: false },
-            { text: 'thiccboi', correct: false }
+            { text: 'alerts', correct: true },
+            { text: 'strings', correct: false },
+            { text: 'boolean', correct: false },
+            { text: 'numbers', correct: false }
         ]
     },
     {
-        question: 'what is my last name?',
+        question: 'Arrays in Javascript can be used to store ______',
         answers: [
-            { text: 'spinal', correct: false },
-            { text: 'esp', correct: false },
-            { text: 'espinal', correct: true },
-            { text: 'esper', correct: false }
+            { text: 'strings', correct: false },
+            { text: 'boolean', correct: false },
+            { text: 'other arrays', correct: false },
+            { text: 'all of the above', correct: true }
         ]
     },
     {
-        question: 'who is my friend?',
+        question: 'Which is the correct tag to implement JavaScript in HTML?',
         answers: [
-            { text: 'mary', correct: false },
-            { text: 'bob', correct: true },
-            { text: 'joe', correct: false },
-            { text: 'esteban', correct: false }
+            { text: '<js>', correct: false },
+            { text: '<script>', correct: true },
+            { text: '<java>', correct: false },
+            { text: '<javascript>', correct: false }
         ]
     },
     {
-        question: 'What is my favorite food?',
+        question: 'What is the correct syntax in order to declare a function?',
         answers: [
-            { text: 'tacos', correct: false },
-            { text: 'burgers', correct: false },
-            { text: 'hot dogs', correct: false },
-            { text: 'pizza', correct: true }
+            { text: 'function startQuiz', correct: false },
+            { text: 'var start = startQuiz() {', correct: false },
+            { text: 'function startQuiz {}', correct: false },
+            { text: 'function startQuiz() {}', correct: true }
         ]
     },
     {
-        question: 'what is my favorite music?',
+        question: 'What does DOM stand for?',
         answers: [
-            { text: 'rap', correct: false },
-            { text: 'pop', correct: false },
-            { text: 'rock', correct: true },
-            { text: 'country', correct: false }
+            { text: 'Doug Orders Milkshakes', correct: false },
+            { text: 'Document Object Message', correct: false },
+            { text: 'Document Object Model', correct: true },
+            { text: 'Document Object Method', correct: false }
         ]
     },
     {
-        question: 'what is my favorite animal?',
+        question: 'String values must be enclosed in ____ when being assigned to a variable',
         answers: [
-            { text: 'monkey', correct: true },
-            { text: 'dog', correct: false },
-            { text: 'cat', correct: false },
-            { text: 'spider', correct: false }
+            { text: 'quotes', correct: true },
+            { text: 'brackets', correct: false },
+            { text: 'parenthesis', correct: false },
+            { text: 'square brackets', correct: false }
         ]
     }
 ]
@@ -96,7 +108,7 @@ function startQuiz() {
     console.log('Quiz start');
     startMenu.classList.add('hide');
 
-    shuffleQuestions = questions.sort(() => Math.random() - 0.5);
+    shuffledQuestions = questions.sort(() => Math.random() - 0.5);
     currentQuestionIndex = 0;
     score = 0;
 
@@ -108,7 +120,7 @@ function startQuiz() {
 
 //brings in random question order
 function nextQuestion() {
-    showQuestion(shuffleQuestions[currentQuestionIndex]);
+    showQuestion(shuffledQuestions[currentQuestionIndex]);
 }
 
 //shows current question
@@ -145,7 +157,6 @@ function answerVerify(btnText, currentQuestionIndex) {
                 verfication.textContent = "Correct";
                 verfication.classList.add('correct');
                 verfication.classList.remove('hide', 'incorrect');
-
                 score = score + 5;
                 console.log(score);
             } else {
@@ -159,18 +170,44 @@ function answerVerify(btnText, currentQuestionIndex) {
     }
 }
 
+
 //runs if time has expired or if answered all questions. allows to save score to local storage
 function endQuiz() {
-    quiz.classList.add('hide');
+    clearInterval(timer);
+
+    content.classList.add('hide');
     highscoreSave.classList.remove('hide');
 
-    var highScore = localStorage.getItem("highscore");
-    if (highScore === null) {
-        highScore = 0;
-    }
+    finalScoreText.textContent = "Your final score is " + score;
+    // var highScore = localStorage.getItem("highscore");
+    // if (highScore === null) {
+    //     highScore = 0;
+    // }
 
-    if (score > highScore) {
-        localStorage.setItem("highscore", score);
-        localStorage.setItem("name", playerName);
-    }
+    highscoreBtn.addEventListener('click', savedScore);
+
 }
+
+function savedScore(event) {
+    var playerName = event.target.text
+    console.log
+    localStorage.setItem(playerName, JSON.stringify(score));
+    loadScores();
+}
+
+function loadScores() {
+    highscoreSave.classList.add('hide');
+    startMenu.classList.add('hide');
+
+    viewHighscore.classList.remove('hide');
+
+
+}
+
+function mainMenu() {
+    viewHighscore.classList.add('hide');
+    startMenu.classList.remove('hide');
+}
+
+scoreTab.addEventListener('click', loadScores);
+backBtn.addEventListener('click', mainMenu);
